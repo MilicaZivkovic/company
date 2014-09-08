@@ -8,8 +8,11 @@
 
 (defn home []
 (layout/common
-[:h1 "Company"]
-[:p "Welcome to admin page"]))
+ [:h1 "Welcome to admin page"]
+ [:p "Please choose working area:"]
+ [:input.pageBtn {:type "a" :value "Places" :onclick "window.location.href = '/place'"}][:br]
+ [:input.pageBtn {:type "a" :value "Sectors" :onclick "window.location.href = '/sector'"}] [:br]
+ [:input.pageBtn {:type "a" :value "Empolyees" :onclick "window.location.href = '/employee'"}]))
 
 (defroutes home-routes
   (GET "/" [] (home)))

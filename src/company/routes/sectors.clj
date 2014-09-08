@@ -10,9 +10,10 @@
   (let [all-sec (db/read-sectors)]
      [:h1 "All Sectors"]
      [:table
-      [:tr [:th "Id"] [:th "Name"] [:th "Delete sector"]]
+      [:tr [:th "Id"] [:th "Name"] [:th "Delete"] [:th "Update"]]
       (for [sec all-sec]
-        [:tr [:td (:id sec)] [:td (:name sec)] [:td [:input.deleteSector {:type "submit" :value "Delete"}]]])]))
+        [:tr [:td (:id sec)] [:td.editable (:name sec)] [:td [:input.deleteSector {:type "submit" :value "Delete"}]]
+          [:td [:input.updateSector {:type "submit" :value "Update"}]]])]))
 
 
 (defn add-sector []
@@ -44,13 +45,18 @@
 
 (defn remove-sector [id]
  (do (let [id (Integer/parseInt id)]
-    (db/delete-sector id)
-    )))
+    (db/delete-sector id))))
+
+(defn update-sector [id name]
+  (do (let [id (Integer/parseInt id)]
+    (db/update-sector id name))))
+
 
 (defroutes sector-routes
   (GET "/sector" [id name error] (home id name error))
   (POST "/sector" [id name] (save-sector id name))
-  (DELETE "/remove-sector" [id] (remove-sector id)))
+  (DELETE "/remove-sector" [id] (remove-sector id))
+  (POST "/update-sector" [id name] (update-sector id name)))
 
 
 

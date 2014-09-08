@@ -11,5 +11,6 @@
     [:body body
      (include-js "//code.jquery.com/jquery-1.10.1.min.js"
                  "/js/places.js"
-                 "/js/sectors.js")]))
+                 "/js/sectors.js"
+                 "/js/employees.js")]))
 

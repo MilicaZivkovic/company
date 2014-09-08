@@ -12,7 +12,11 @@
      [:table
       [:tr [:th "Id"] [:th "Name"] [:th "Delete place"]]
       (for [plc all-plc]
-        [:tr [:td (:id plc)] [:td (:name plc)] [:td [:input.deletePlace {:type "submit" :value "Delete"}]]])]))
+        [:tr
+         [:td (:id plc)]
+         [:td.editable (:name plc)]
+         [:td [:input.deletePlace {:type "submit" :value "Delete"}]]
+         [:td [:input.updatePlace {:type "submit" :value "Update"}]]])]))
 
 
 (defn add-place []
@@ -47,10 +51,15 @@
     (db/delete-place id)
     )))
 
+(defn update-place [id name]
+  (do (let [id (Integer/parseInt id)]
+    (db/update-place id name))))
+
 (defroutes place-routes
   (GET "/place" [id name error] (home id name error))
   (POST "/place" [id name] (save-place id name))
-  (DELETE "/remove-place" [id] (remove-place id)))
+  (DELETE "/remove-place" [id] (remove-place id))
+  (POST "/update-place" [id name] (update-place id name)))
 
 
 

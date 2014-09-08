@@ -82,8 +82,6 @@
   (sql/update! db :salary
                 {:amount amount} ["emp_id = ?" emp_id]))
 
-(defn delete-employee [emp_id]
- (sql/delete! db :salary ["emp_id = ?" emp_id]))
 
 
 
